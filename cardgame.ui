@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>652</width>
-    <height>416</height>
+    <width>1021</width>
+    <height>685</height>
    </rect>
   </property>
   <property name="palette">
@@ -80,27 +80,13 @@
   <property name="autoFillBackground">
    <bool>true</bool>
   </property>
-  <widget class="QWidget" name="centralWidget">
-   <widget class="card" name="label">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>140</y>
-      <width>111</width>
-      <height>151</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>TextLabel</string>
-    </property>
-   </widget>
-  </widget>
+  <widget class="QWidget" name="centralWidget"/>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>652</width>
+     <width>1021</width>
      <height>26</height>
     </rect>
    </property>
@@ -112,23 +98,22 @@
      <property name="title">
       <string>&amp;New</string>
      </property>
+     <addaction name="action_Freecell"/>
+     <addaction name="action_Spider"/>
      <addaction name="action_Klondike"/>
     </widget>
     <addaction name="menu_New"/>
     <addaction name="action_Redeal"/>
-   </widget>
-   <widget class="QMenu" name="menuEdit">
-    <property name="title">
-     <string>&amp;Edit</string>
-    </property>
+    <addaction name="action_Undo"/>
    </widget>
    <widget class="QMenu" name="menu_Help">
     <property name="title">
      <string>&amp;Help</string>
     </property>
+    <addaction name="action_Help"/>
+    <addaction name="action_About"/>
    </widget>
    <addaction name="menu_Game"/>
-   <addaction name="menuEdit"/>
    <addaction name="menu_Help"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
@@ -144,21 +129,45 @@
    <property name="text">
     <string>&amp;Redeal</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+R</string>
+   </property>
+  </action>
+  <action name="action_Freecell">
+   <property name="text">
+    <string>&amp;Freecell</string>
+   </property>
+  </action>
+  <action name="action_Spider">
+   <property name="text">
+    <string>&amp;Spider</string>
+   </property>
   </action>
   <action name="action_Klondike">
    <property name="text">
     <string>&amp;Klondike</string>
    </property>
   </action>
+  <action name="action_About">
+   <property name="text">
+    <string>&amp;About</string>
+   </property>
+  </action>
+  <action name="action_Undo">
+   <property name="text">
+    <string>&amp;Undo</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Z</string>
+   </property>
+  </action>
+  <action name="action_Help">
+   <property name="text">
+    <string>&amp;Help</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <customwidgets>
-  <customwidget>
-   <class>card</class>
-   <extends>QLabel</extends>
-   <header location="global">card.h</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>

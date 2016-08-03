@@ -1,8 +1,14 @@
-
 #ifndef CARD_H
 #define CARD_H
 #include <QImage>
 #include <QLabel>
+#include <QMouseEvent>
+#include "pile.h"
+#include "move.h"
+#include <QStack>
+#include <QList>
+#include <QStack>
+
 enum cardColors {BLACK, RED};
 enum pips {ACE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING};
 enum suits {CLUBS, DIAMONDS, HEARTS, SPADES };
@@ -11,52 +17,55 @@ class card: public QLabel
 {
 
 private:
-    static QImage faces[53];
+    static QImage faces[54];
     static bool initialized;
-    int value; //0 to 51
-    // Card *under
-    //Card *over;
-    //Pile *pile;
+    static QPoint mouseDownOffset; //initialized on mouse down event
+    static QPoint startDragPos;
+    static bool buttonDown;
+    static QPoint popUpPos;
+    static card* popUpCard;
+    card* over; //card that is over it on the pile
+    card* under; //card that is under it on the pile
+    Pile *on;
+    pips pip;
+    suits suit;
+    cardColors cardColor;
 
-    /*no need in the 1st impl.
-     * cardColors color;
-     * pips pips
-     * suits suit
-     * bool faceup
-     * bool moving
-     * bool oktodrag
-     *
-     * bool hasMouseDown
-     * static QPoint mouseDownOffset //distance to add to mouse pos to mo
-     * static QPoint startDragPos;
-     * static QT:MouseButtons button down;
-     * static QPoint popUppos
-     * static Card* popupcard
-     * */
+
+    int value; //0 to 51 to get the image of the card
+    int id;
+
 public:
-    card(int v, QWidget* parent =0);
-    card(pips p , suits s, QWidget* parent = 0);
+    card(pips p, suits s, int v, int id, QWidget* parent);
+    ~card();
+    bool faceup;
+    QList<Pile*>* piles;
     static void Initialize();
-    /*
-     * accessors
-     *
-     *
-     * void mousePressEvent(QMOuseEvent * ev);
-     * void mouseMoveEvent(QMOuseEvent * ev);
-     * void mouseReleaseEvent(QMOuseEvent * ev);
-     * void mouseDoubleClickEvent(QMOuseEvent * ev);
-     *
-     * */
+    pips getPip(){return pip;}
+    suits getSuit(){return suit;}
+    cardColors getColor(){return cardColor;}
+    card* getOver(){return over;}
+    void setOver(card* c){over = c;}
+    void setUnder(card* c){under = c;}
+    void setPile(Pile* p);
+    void setImage();
+    int getId(){return id;}
+    void mousePressEvent(QMouseEvent* ev);
+    void mouseReleaseEvent(QMouseEvent* ev);
+    void mouseMoveEvent(QMouseEvent* ev);
+    void mouseDoubleClickEvent(QMouseEvent* ev);
+    bool okTodrag(Pile* pile); // check if cards can be dragged
+    void setFaceUp(){faceup = true; setImage();}
+    void setFaceDown(){faceup = false;}
+    bool isfaceup(){return faceup;}
+    void winCheck();
+    void sequenceCheck(Pile* piles); // for spider, checks if a sequence from Ace to King was made. If yes send it to stock pile
+    void refill(); //for klondike, when the cards are over on the deck, refill it.
+    QStack<Move>* history; //record movements
+    void setHistory(QStack<Move>* h){history = h;}
+    friend class Pile;
+
 };
 
-//void Shuffle(Card* Deck[], int n);
-//choose a random number to pick a card from the deck
-//action game triggered
-/*
- * if(game) delete game;
- * resize(600,600)
- * setsizepolicy(qsizepolicy(qsizepolicy::minimum,Qsizepolicy::minimum);
- * game = nre klondike
-*/
-//qsrand(t.elapsed());
+
 #endif // CARD_H

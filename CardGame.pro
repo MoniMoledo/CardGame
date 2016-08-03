@@ -14,12 +14,35 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         cardgame.cpp \
-    card.cpp
+    card.cpp \
+    pile.cpp \
+    rule.cpp \
+    freecell.cpp \
+    spider.cpp \
+    games.cpp \
+    klondike.cpp \
+    move.cpp \
+    helpdialog.cpp \
+    aboutdialog.cpp \
+    windialog.cpp
 
 HEADERS  += cardgame.h \
-    card.h
+    card.h \
+    pile.h \
+    rule.h \
+    freecell.h \
+    spider.h \
+    games.h \
+    klondike.h \
+    move.h \
+    helpdialog.h \
+    aboutdialog.h \
+    windialog.h
 
-FORMS    += cardgame.ui
+FORMS    += cardgame.ui \
+    helpdialog.ui \
+    aboutdialog.ui \
+    windialog.ui
 
 RESOURCES += \
     cardimages.qrc
